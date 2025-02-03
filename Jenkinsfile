@@ -4,18 +4,32 @@ pipeline {
         string(name: 'BROWSER', defaultValue: 'chrome', description: 'Browser to use for tests')
     }
     stages {
+        stage('Checkout') {
+            steps {
+                // Clone the repository
+                git 'git@github.com:trclinton/Company.git'
+            }
+        }
         stage('Build') {
             steps {
-                // Your build steps here
+                // Build the project using Gradle
+                sh './gradlew clean build'
             }
         }
         stage('Test') {
             steps {
                 script {
-                    // Run your tests with the browser parameter
-                    sh "mvn test -Dbrowser=${params.BROWSER}"
+                    // Run the tests with the browser parameter
+                    sh "./gradlew test -Dbrowser=${params.BROWSER}"
                 }
             }
+        }
+    }
+    post {
+        always {
+            // Archive test results and clean up
+            junit 'build/test-results/test/*.xml'
+            cleanWs()
         }
     }
 }
