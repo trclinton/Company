@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // REST Assured for API testing
+    testImplementation 'io.rest-assured:rest-assured:5.3.0'
+
+    // JSON parsing support
+    testImplementation 'io.rest-assured:json-path:5.3.0'
+    testImplementation 'io.rest-assured:xml-path:5.3.0'
+
+    // Selenium
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.10.0'
+    testImplementation 'io.qameta.allure:allure-junit5:2.22.0'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
+    // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+
+    // Optional: WebDriverManager for local testing
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.3.2'
+
+    testImplementation 'org.apache.poi:poi:5.2.3'
+    testImplementation 'org.apache.poi:poi-ooxml:5.2.3'
+
+    testImplementation 'org.testng:testng:7.10.2'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+
+
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    testImplementation 'io.rest-assured:rest-assured:5.5.0'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+}
+
+test {
+    useTestNG()
+    systemProperty 'browser', System.getProperty('browser', 'chrome')
+}
