@@ -7,7 +7,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone the repository
-                git 'git@github.com:trclinton/Company.git'
+                git 'https://github.com/trclinton/Company.git'
             }
         }
         stage('Build') {
